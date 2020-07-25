@@ -10,3 +10,4 @@
                 -  we can discretisation
                     - we can handle outliers
                         -also feature scaling
+    - Build a Feature engineering pipeline, to analyze new data, to produce reproducible research, to deploy code.
