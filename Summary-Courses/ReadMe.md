@@ -41,7 +41,8 @@
     plt.show()
 
 **How is the target, "target var", related to these categories?**
-        def calculate_mean_target_per_category(df, var, target):
+
+    def calculate_mean_target_per_category(df, var, target):
 
             # total number of houses
             total_houses = len(df)
@@ -70,4 +71,26 @@
             ax.set_xlabel(var)
             ax2.set_ylabel('Average Sale Price per category')
             plt.show()
+
+### Replace Rare labels
+        
+def group_rare_labels(df, var):
+
+    total_houses = len(df)
+
+    # first I calculate the % of houses for each category
+    temp_df = pd.Series(df[var].value_counts() / total_houses)
+
+    # now I create a dictionary to replace the rare labels with the
+    # string 'rare' if they are present in less than 5% of houses
+
+    grouping_dict = {
+        k: ('rare' if k not in temp_df[temp_df >= 0.05].index else k)
+        for k in temp_df.index
+    }
+
+    # now I replace the rare categories
+    tmp = df[var].map(grouping_dict)
+
+    return tmp
 
