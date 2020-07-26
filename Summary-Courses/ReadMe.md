@@ -73,7 +73,7 @@
             plt.show()
 
 ### Replace Rare labels
-        
+
 def group_rare_labels(df, var):
 
     total_houses = len(df)
@@ -93,4 +93,38 @@ def group_rare_labels(df, var):
     tmp = df[var].map(grouping_dict)
 
     return tmp
+
+
+## Outlier detection and removal: Outliers can lead to bad gen. or bad model, as some model can put more weight on outliers. These ways can be adopted to detect and remove outliers.
+- **Extreme value analysis**: 
+    If the the variable is Normally distributed (Gaussian), then the values that lie outside the mean plus or minus 3 times the standard deviation of the variable are considered outliers.
+
+    __outliers__ = mean +/- 3* std
+    If the variable is skewed distributed, a general approach is to calculate the quantiles, and then the inter-quantile range (IQR), as follows:
+
+    IQR = 75th quantile - 25th quantile
+    An outlier will sit outside the following upper and lower boundaries:
+
+    Upper boundary = 75th quantile + (IQR * 1.5)
+
+    Lower boundary = 25th quantile - (IQR * 1.5)
+
+    or for extreme cases:
+
+    Upper boundary = 75th quantile + (IQR * 3)
+
+    Lower boundary = 25th quantile - (IQR * 3)
+
+    relevant code:
+        def find_normal_boundaries(df, variable):
+
+        # calculate the boundaries outside which sit the outliers
+        # for a Gaussian distribution
+
+        upper_boundary = df[variable].mean() + 3 * df[variable].std()
+        lower_boundary = df[variable].mean() - 3 * df[variable].std()
+
+        return upper_boundary, lower_boundary
+
+
 
