@@ -26,7 +26,8 @@
     - so feature engineer the high cardinality variables
     - club the labels with low frequency into RARE labels
     - relevant formulaes: pd.Series(data[col].value_counts() / length_of_data)
-    -plotting ex:
+
+**plotting ex**:
 
     temp_df = pd.Series(data[col].value_counts() / total_houses)
 
@@ -39,7 +40,7 @@
     fig.set_ylabel('Percentage of houses')
     plt.show()
 
-    **How is the target, "target var", related to these categories?**
+**How is the target, "target var", related to these categories?**
         def calculate_mean_target_per_category(df, var, target):
 
             # total number of houses
