@@ -25,15 +25,13 @@
 
     ## Relevant Code
     vars_cca = [var for var in data.columns if data[var].isnull().mean() < 0.05]
-    - check the distribution of the variables once the nan entries are removed, to ensure no significant difference occurs.
+    check the distribution of the variables once the nan entries are removed, to ensure no significant difference occurs.
 
 ##  Mean-median Imputation:
-- Imputation should be done over the training set, and then propagated to the test set. This means that the mean / median to be used to fill missing values both in train and test set, should be extracted from the train set only. And this is to avoid overfitting.
+Imputation should be done over the training set, and then propagated to the test set. This means that the mean / median to be used to fill missing values both in train and test set, should be extracted from the train set only. And this is to avoid overfitting.
 
     ##Mean / median imputation with Scikit-learn ==> SimpleImputer
-   
     The SimpleImputer class provides basic strategies for imputing missing values, including:
-
     Mean and median imputation for numerical variables
     Most frequent category imputation for categorical variables
     Arbitrary value imputation for both categorical and numerical variables
@@ -62,7 +60,6 @@
     imputer = SimpleImputer(strategy='median')
 
     ##we fit the imputer to the train set
-    ##the imputer will learn the median of all variables
     imputer.fit(X_train[cols_to_use])
 
     ##we can look at the learnt medians like this:
