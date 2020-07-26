@@ -1,9 +1,9 @@
 # Summary - Feature Engineering and Feature Selection
-* Data Analysis: 
+* Data Analysis*: 
     - Understand the variables (whether it is numerical, categorical, date/time, mixed, anything else) and Understand what we are trying to predict
         -  Also, check whether we have problem of missing data; if we have categorical (then we want to encode them into numbers); if the variables follow linear model assumptions, if the distribution is normal, skewed (if skewed, we want to perform transformations); if the variables contain outliers; if the features have different magnitudes (then we want to scale them)
     
-*  Feature Engineering: 
+*  Feature Engineering*: 
     - We can create new features from dates, mixed vars
         -   we may impute missing values
             - we may perfrom numerical variable transform  
@@ -11,3 +11,15 @@
                     - we can handle outliers
                         -also feature scaling
     - Build a Feature engineering pipeline, to analyze new data, to produce reproducible research, to deploy code.
+
+
+ ## Missing data: There could be 3 different categories of missing data
+        # MCAR - No relationship with other variables or given information
+        # MAR - some relationship with other variable
+        # MNAR - systematic relationship with other variables
+
+## Cardinality: High cardinality tend to:
+    * overfit the linear models (some of the labels may only be present in the test set)
+    * create bias in tree based models 
+- so feature engineer the high cardinality variables
+- club the labels with low frequency into RARE labels
