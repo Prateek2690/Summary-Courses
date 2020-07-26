@@ -139,3 +139,7 @@ Imputation is the act of replacing missing data with statistical estimates of th
 
     ##Final note
     When variables are captured by third parties, like credit agencies, they place arbitrary numbers already to signal the fact that the value for that observation is missing. So arbitrary value imputation is also common practice in real life data collections.
+
+    ##using Sklearn
+    imputer = SimpleImputer(strategy='constant', 
+                       fill_value = 999)
