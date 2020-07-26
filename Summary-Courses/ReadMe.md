@@ -13,16 +13,17 @@
     - Build a Feature engineering pipeline, to analyze new data, to produce reproducible research, to deploy code.
 
 
- ## Missing data: There could be 3 different categories of missing data
-        # MCAR - No relationship with other variables or given information
-        # MAR - some relationship with other variable
-        # MNAR - systematic relationship with other variables
+ ## Missing data: 
+    There could be 3 different categories of missing data
+    - MCAR - No relationship with other variables or given information
+    - MAR - some relationship with other variable
+    - MNAR - systematic relationship with other variables
+    - relevant formulaes: df.isnull().sum() or df.isnull().mean()
 
-       - relevant formulaes: df.isnull().sum() or df.isnull().mean()
-
-## Cardinality: High cardinality tend to:
-    * overfit the linear models (some of the labels may only be present in the test set)
-    * create bias in tree based models 
+## Cardinality: 
+    High cardinality tend to:
+    - overfit the linear models (some of the labels may only be present in the test set)
+    - create bias in tree based models 
     - so feature engineer the high cardinality variables
     - club the labels with low frequency into RARE labels
     - relevant formulaes: pd.Series(data[col].value_counts() / length_of_data)
@@ -95,9 +96,11 @@ def group_rare_labels(df, var):
     return tmp
 
 
-## Outlier detection and removal: Outliers can lead to bad gen. or bad model, as some model can put more weight on outliers. These ways can be adopted to detect and remove outliers.
-- **Extreme value analysis**: 
-    If the the variable is Normally distributed (Gaussian), then the values that lie outside the mean plus or minus 3 times the standard deviation of the variable are considered outliers.
+## Outlier detection and removal: 
+    Outliers can lead to bad gen. or bad model, as some model can put more weight on outliers. These ways can be adopted to detect and remove outliers.
+
+**Extreme value analysis**: 
+### If the the variable is Normally distributed (Gaussian), then the values that lie outside the mean plus or minus 3 times the standard deviation of the variable are considered outliers.
 
     __outliers__ = mean +/- 3* std
     If the variable is skewed distributed, a general approach is to calculate the quantiles, and then the inter-quantile range (IQR), as follows:
@@ -126,5 +129,23 @@ def group_rare_labels(df, var):
 
         return upper_boundary, lower_boundary
 
+### if the variable is skewed,
+def find_skewed_boundaries(df, variable, distance):
 
+    # Let's calculate the boundaries outside which sit the outliers
+    # for skewed distributions
+
+    # distance passed as an argument, gives us the option to
+    # estimate 1.5 times or 3 times the IQR to calculate
+    # the boundaries.
+
+    IQR = df[variable].quantile(0.75) - df[variable].quantile(0.25)
+
+    lower_boundary = df[variable].quantile(0.25) - (IQR * distance)
+    upper_boundary = df[variable].quantile(0.75) + (IQR * distance)
+
+    return upper_boundary, lower_boundary
+
+# Variable Magnitude
+- feature scaling affect linear-like models or distance based models (linear, logistic, SVMs, KNN)
 
